@@ -1,6 +1,7 @@
 # a graph class, based on map, offer a general class for graphs/networks
 class graph:
-    # graph class initializer, by giving a dictionary
+    # graph class initializer, by giving a dictionary,
+    # dont give egdes with capacity 0, otherwise the fails happens
     def __init__(self, gdict=None):
         if (gdict == None):
             self.gdict = {}
@@ -31,6 +32,8 @@ class graph:
     def get_edges_node(self, vertex):
         res = []
         all_edges = self.get_edges(vertex)
+        if (all_edges == None):
+            return []
         for i in range(0, len(all_edges)):
             res.append(all_edges[i][0])
         return res
@@ -170,29 +173,3 @@ def ek_maxflow(g, source, terminal):
         
     
     return total_max_flow, all_augmented_paths
-
-
-example_graph3 = {'s':[['1', 16], ['2', 13]], 
-                '1': [['2', 10], ['3', 12]],
-                '2': [['1', 4],['4', 14]],
-                '3': [['2', 9], ['t', 20]],
-                '4': [['3', 7], ['t', 4]],
-                't': []}
-                
-ex3_res = ek_maxflow(graph(example_graph3), 's', 't')
-
-print(ex3_res)
-
-
-example_graph4 = {'s':[['0', 1], ['2', 1], ['5', 1]], 
-                '0': [['1', 1], ['3', 1], ['4', 1], ['6', 1]],
-                '2': [['3', 1], ['4', 1], ['6', 1]],
-                '5': [['6', 1]],
-                '1': [['t', 1]],
-                '3': [['t', 1]],
-                '4': [['t', 1]],
-                '6': [['t', 1]],
-                't': []}
-ex4_res = ek_maxflow(graph(example_graph4), 's', 't')
-
-print(ex4_res)
